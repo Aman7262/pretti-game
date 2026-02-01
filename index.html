@@ -1,110 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Pretti 💛</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ffd54f, #ff8f00);
-    color: #333;
-    overflow-x: hidden;
+  margin:0;
+  font-family: Arial, sans-serif;
+  text-align:center;
+  background:linear-gradient(135deg,#ffd54f,#ff8f00);
+  color:white;
+  overflow-x:hidden;
 }
+
+section { padding:80px 20px; }
+h1,h2 { margin-bottom:15px; }
 
 .bg-text {
-    position: fixed;
-    top: 10%;
-    width: 100%;
-    font-size: 2.5em;
-    color: rgba(255,255,255,0.15);
-    font-weight: bold;
-    animation: floatText 6s ease-in-out infinite;
-    pointer-events: none;
+  position:fixed;
+  top:10%;
+  width:100%;
+  font-size:2.5em;
+  color:rgba(255,255,255,0.15);
+  animation:floatText 6s ease-in-out infinite;
+  pointer-events:none;
 }
+@keyframes floatText { 50% { transform:translateY(-15px);} }
 
-@keyframes floatText {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
+.gallery { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; }
+.photo-card { background:white; padding:8px; border-radius:15px; width:140px; color:#ff6f00; }
+.photo-card img { width:100%; border-radius:10px; }
 
-h1 { margin-top: 60px; color: white; }
+.love-btn { padding:10px 18px; border:none; border-radius:25px; margin:8px; font-size:16px; cursor:pointer; }
+#yesBtn { background:#ff4081; color:white; }
+#noBtn { background:#9e9e9e; color:white; position:relative; }
 
-.gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 20px;
-}
+.hidden { display:none; }
 
-.photo-card {
-    background: white;
-    padding: 8px;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    width: 160px;
-}
+.progress-bar { width:80%; height:20px; background:white; border-radius:20px; margin:10px auto; overflow:hidden; }
+.progress-fill { height:100%; width:0%; background:#ff4081; }
 
-.photo-card img { width: 100%; border-radius: 10px; }
+.card { display:inline-block; width:70px; height:70px; margin:8px; font-size:30px; line-height:70px; background:white; color:#ff4081; border-radius:10px; cursor:pointer; }
 
-.caption {
-    margin-top: 6px;
-    font-weight: bold;
-    color: #ff6f00;
-    font-size: 0.9em;
-}
+#ball { font-size:42px; transition:transform 0.6s ease; }
+@keyframes fall { to { transform:translateY(110vh); opacity:0;} }
 
-.game-box {
-    margin: 30px 15px;
-    padding: 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    position: relative;
-}
-
-.love-btn {
-    font-size: 16px;
-    padding: 12px 18px;
-    margin: 8px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-#yesBtn { background: #ff4081; color: white; }
-#noBtn  { background: #9e9e9e; color: white; position: relative; }
-
-#gameArea, #heartGame { display: none; margin-top: 20px; }
-
-#ball { font-size: 42px; transition: transform 0.6s ease; }
-
-#cheer {
-    display: none;
-    font-weight: bold;
-    color: #d84315;
-    margin-top: 12px;
-    animation: pop 0.5s ease;
-}
-
-#score { font-weight: bold; margin-top: 5px; }
-
-@keyframes pop {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes fall {
-    to { transform: translateY(110vh); opacity: 0; }
-}
-
-@media (max-width: 500px) {
-    .photo-card { width: 140px; }
-}
+input[type=range]{ width:80%; }
 </style>
 </head>
 
@@ -112,125 +55,163 @@ h1 { margin-top: 60px; color: white; }
 
 <div class="bg-text">Sorry Bachaaaa 💛</div>
 
-<h1>Hey Pretti 💛</h1>
+<!-- INTRO -->
+<section>
+  <h1>Hey Pretti 💛</h1>
+  <div class="gallery">
+    <div class="photo-card"><img src="pretti1.jpg"><div>Cutuu smoll pretti 🥹</div></div>
+    <div class="photo-card"><img src="pretti2.jpg"><div>Born to be adorable 💕</div></div>
+  </div>
+</section>
 
-<div class="gallery">
-    <div class="photo-card">
-        <img src="pretti1.jpg">
-        <div class="caption">Cutuu smoll pretti 🥹</div>
-    </div>
-    <div class="photo-card">
-        <img src="pretti2.jpg">
-        <div class="caption">Born to be adorable 💕</div>
-    </div>
-</div>
+<!-- LOVE QUESTION -->
+<section>
+  <h2>Important Question 😌</h2>
+  <h3>Do you love me? 🥺</h3>
+  <button id="yesBtn" class="love-btn" onclick="showCricket()">Yes 💖</button>
+  <button id="noBtn" class="love-btn">No 😏</button>
+</section>
 
-<div class="game-box">
-    <h2>Do you love me? 🥺</h2>
-    <button id="yesBtn" class="love-btn" onclick="startGame()">Yes 💖</button>
-    <button id="noBtn" class="love-btn">No 😏</button>
+<!-- CRICKET GAME -->
+<section id="cricket" class="hidden">
+  <h2>Mini Cricket Game 🏏</h2>
+  <div id="ball">🏏</div>
+  <button class="love-btn" onclick="hitSix()">HIT SHOT 💥</button>
+  <p id="cheer"></p>
+</section>
 
-    <div id="gameArea">
-        <p>Tap to help Thala hit a SIX! 🏏</p>
-        <div id="ball">🏏</div>
-        <button class="love-btn" onclick="hitSix()">HIT SHOT 💥</button>
-        <div id="cheer">🎉 THALA FOR A REASON!!! 🎉</div>
-    </div>
+<!-- HEART CATCH -->
+<section id="heartGame" class="hidden">
+  <h2>Catch the Love Hearts 💖</h2>
+  <p>Score: <span id="heartScore">0</span></p>
+</section>
 
-    <div id="heartGame">
-        <h3>Catch the love hearts 💖</h3>
-        <p>Tap the hearts before they vanish!</p>
-        <div id="score">Score: 0</div>
-    </div>
+<!-- COMPLIMENTS -->
+<section>
+  <h2>Press for Surprise 💌</h2>
+  <button class="love-btn" onclick="giveCompliment()">Tap Here</button>
+  <p id="compliment"></p>
+</section>
 
-    <div style="margin-top:25px;">
-        <button class="love-btn" onclick="giveCompliment()">Press for surprise 💌</button>
-        <div id="compliment" style="margin-top:10px; font-weight:bold; color:#e91e63;"></div>
-    </div>
-</div>
+<!-- MEMORY MATCH -->
+<section>
+  <h2>Memory Match 💌</h2>
+  <div id="memoryGame"></div>
+  <p id="memoryMsg"></p>
+</section>
+
+<!-- PHOTO PUZZLE -->
+<section>
+  <h2>Puzzle Time 🧩</h2>
+  <img src="pretti1.jpg" width="120"><br>
+  <button class="love-btn" onclick="solvePuzzle()">Place Pieces</button>
+  <p id="puzzleMsg"></p>
+</section>
+
+<!-- KISS CATCH -->
+<section>
+  <h2>Catch the Kisses 😘</h2>
+  <p>Kisses: <span id="kissScore">0</span></p>
+  <button class="love-btn" onclick="startKisses()">Start</button>
+</section>
+
+<!-- QUIZ -->
+<section>
+  <h2>Love Quiz 💖</h2>
+  <button class="love-btn" onclick="quizWin()">Who’s cutest?</button>
+  <p id="quizMsg"></p>
+</section>
+
+<!-- MOOD SLIDER -->
+<section>
+  <h2>Mood Meter 😊</h2>
+  <input type="range" min="0" max="100" value="0" oninput="checkMood(this.value)">
+  <p id="moodMsg"></p>
+</section>
+
+<!-- RELATIONSHIP LEVEL -->
+<section>
+  <h2>Relationship Level 💞</h2>
+  <div class="progress-bar"><div class="progress-fill" id="levelBar"></div></div>
+  <p id="levelMsg"></p>
+</section>
 
 <script>
-// No button runs away
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo);
+let level=0;
+function levelUp(){ level+=10; document.getElementById("levelBar").style.width=level+"%";
+ if(level>=100) document.getElementById("levelMsg").innerText="Girlfriend Level: LEGENDARY PRETTI EDITION 💛"; }
 
-function moveNo() {
-    const x = Math.random() * 120 - 60;
-    const y = Math.random() * 120 - 60;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    noBtn.innerText = "Yes 😌";
+/* NO BUTTON RUNS */
+const noBtn=document.getElementById("noBtn");
+noBtn.onmouseover=noBtn.onclick=function(){
+ noBtn.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*120-60}px)`;
+ noBtn.innerText="Yes 😌";
+};
+
+/* CRICKET */
+function showCricket(){ document.getElementById("cricket").classList.remove("hidden"); window.scrollTo({top:cricket.offsetTop,behavior:'smooth'}); }
+function hitSix(){
+ document.getElementById("ball").style.transform="translateY(-120px)";
+ document.getElementById("cheer").innerText="🎉 THALA FOR A REASON!!! 🎉";
+ document.getElementById("heartGame").classList.remove("hidden");
+ levelUp();
+ startHearts();
 }
 
-// Start cricket game
-function startGame() {
-    document.getElementById("gameArea").style.display = "block";
+/* HEARTS */
+let heartScore=0;
+function startHearts(){
+ setInterval(()=>{
+  let h=document.createElement("div");
+  h.innerHTML="💖"; h.style.position="fixed"; h.style.left=Math.random()*90+"vw"; h.style.top="100vh";
+  h.style.fontSize="28px"; h.style.transition="top 3s linear"; document.body.appendChild(h);
+  setTimeout(()=>h.style.top="-10vh",50);
+  h.onclick=()=>{ heartScore++; document.getElementById("heartScore").innerText=heartScore; h.remove(); if(heartScore==5) levelUp(); };
+  setTimeout(()=>h.remove(),3000);
+ },800);
 }
 
-// Hit six
-function hitSix() {
-    document.getElementById("ball").style.transform = "translateY(-120px)";
-    document.getElementById("cheer").style.display = "block";
-    confettiBurst();
-    startHearts();
+/* COMPLIMENTS */
+function giveCompliment(){
+ const lines=["You have the cutest smile 😌","You make my world brighter 💛","Certified Pretti = adorable 🥹"];
+ document.getElementById("compliment").innerText=lines[Math.floor(Math.random()*lines.length)];
+ levelUp();
 }
 
-// Confetti
-function confettiBurst() {
-    for (let i = 0; i < 40; i++) {
-        const conf = document.createElement("div");
-        conf.innerHTML = "✨";
-        conf.style.position = "fixed";
-        conf.style.left = Math.random() * 100 + "vw";
-        conf.style.top = "-10px";
-        conf.style.fontSize = "20px";
-        conf.style.animation = "fall 2s linear forwards";
-        document.body.appendChild(conf);
-        setTimeout(() => conf.remove(), 2000);
-    }
+/* MEMORY MATCH */
+const emojis=["💛","💖","💛","💖"]; emojis.sort(()=>0.5-Math.random());
+let flipped=[]; const memDiv=document.getElementById("memoryGame");
+emojis.forEach(e=>{
+ let c=document.createElement("div"); c.className="card"; c.innerText="❓";
+ c.onclick=()=>{ c.innerText=e; flipped.push({c,e});
+  if(flipped.length==2){ if(flipped[0].e===flipped[1].e){document.getElementById("memoryMsg").innerText="You found all the love 💛"; levelUp();}
+   else setTimeout(()=>flipped.forEach(f=>f.c.innerText="❓"),600);
+   flipped=[];}
+ };
+ memDiv.appendChild(c);
+});
+
+/* PUZZLE */
+function solvePuzzle(){ document.getElementById("puzzleMsg").innerText="Every piece fits… just like us 💛"; levelUp(); }
+
+/* KISSES */
+let kissScore=0;
+function startKisses(){
+ setInterval(()=>{
+  let k=document.createElement("div");
+  k.innerText="😘"; k.style.position="fixed"; k.style.left=Math.random()*90+"vw"; k.style.top="100vh";
+  k.style.fontSize="28px"; k.style.transition="top 3s linear"; document.body.appendChild(k);
+  setTimeout(()=>k.style.top="-10vh",50);
+  k.onclick=()=>{kissScore++; document.getElementById("kissScore").innerText=kissScore; k.remove(); if(kissScore==5) levelUp();};
+  setTimeout(()=>k.remove(),3000);
+ },800);
 }
 
-// Heart catch game
-let score = 0;
-function startHearts() {
-    document.getElementById("heartGame").style.display = "block";
-    setInterval(createHeart, 800);
-}
+/* QUIZ */
+function quizWin(){ document.getElementById("quizMsg").innerText="Correct. It was always Pretti 😌"; levelUp(); }
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = Math.random() * 90 + "vw";
-    heart.style.top = "100vh";
-    heart.style.fontSize = "28px";
-    heart.style.cursor = "pointer";
-    heart.style.transition = "top 3s linear";
-    document.body.appendChild(heart);
-
-    setTimeout(() => { heart.style.top = "-10vh"; }, 50);
-
-    heart.onclick = () => {
-        score++;
-        document.getElementById("score").innerText = "Score: " + score;
-        heart.remove();
-    };
-
-    setTimeout(() => heart.remove(), 3000);
-}
-
-// Compliments
-function giveCompliment() {
-    const lines = [
-        "You have the cutest smile in the universe 😌",
-        "You make my bad days disappear 💛",
-        "Certified Pretti = 100% adorable 🥹",
-        "My favorite notification is you 📱💖",
-        "You are literally my happy place ✨"
-    ];
-    const random = lines[Math.floor(Math.random() * lines.length)];
-    document.getElementById("compliment").innerText = random;
-}
+/* MOOD */
+function checkMood(v){ if(v>70){ document.getElementById("moodMsg").innerText="That smile >>> everything 💛"; levelUp(); } }
 </script>
 
 </body>
