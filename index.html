@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For Pretti 💛</title>
 
 <style>
@@ -12,9 +12,9 @@ body {
     text-align: center;
     background: linear-gradient(135deg, #ffd54f, #ff8f00);
     color: #333;
+    overflow-x: hidden;
 }
 
-/* Floating background text */
 .bg-text {
     position: fixed;
     top: 10%;
@@ -31,11 +31,7 @@ body {
     50% { transform: translateY(-15px); }
 }
 
-h1 {
-    margin-top: 60px;
-    color: white;
-    font-size: 2em;
-}
+h1 { margin-top: 60px; color: white; }
 
 .gallery {
     display: flex;
@@ -53,10 +49,7 @@ h1 {
     width: 160px;
 }
 
-.photo-card img {
-    width: 100%;
-    border-radius: 10px;
-}
+.photo-card img { width: 100%; border-radius: 10px; }
 
 .caption {
     margin-top: 6px;
@@ -86,15 +79,9 @@ h1 {
 #yesBtn { background: #ff4081; color: white; }
 #noBtn  { background: #9e9e9e; color: white; position: relative; }
 
-#gameArea {
-    display: none;
-    margin-top: 20px;
-}
+#gameArea, #heartGame { display: none; margin-top: 20px; }
 
-#ball {
-    font-size: 42px;
-    transition: transform 0.6s ease;
-}
+#ball { font-size: 42px; transition: transform 0.6s ease; }
 
 #cheer {
     display: none;
@@ -104,12 +91,17 @@ h1 {
     animation: pop 0.5s ease;
 }
 
+#score { font-weight: bold; margin-top: 5px; }
+
 @keyframes pop {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
 
-/* Mobile spacing */
+@keyframes fall {
+    to { transform: translateY(110vh); opacity: 0; }
+}
+
 @media (max-width: 500px) {
     .photo-card { width: 140px; }
 }
@@ -124,11 +116,11 @@ h1 {
 
 <div class="gallery">
     <div class="photo-card">
-        <img src="pretti1.jpg" alt="Pretti photo">
+        <img src="pretti1.jpg">
         <div class="caption">Cutuu smoll pretti 🥹</div>
     </div>
     <div class="photo-card">
-        <img src="pretti2.jpg" alt="Pretti baby photo">
+        <img src="pretti2.jpg">
         <div class="caption">Born to be adorable 💕</div>
     </div>
 </div>
@@ -144,12 +136,22 @@ h1 {
         <button class="love-btn" onclick="hitSix()">HIT SHOT 💥</button>
         <div id="cheer">🎉 THALA FOR A REASON!!! 🎉</div>
     </div>
+
+    <div id="heartGame">
+        <h3>Catch the love hearts 💖</h3>
+        <p>Tap the hearts before they vanish!</p>
+        <div id="score">Score: 0</div>
+    </div>
+
+    <div style="margin-top:25px;">
+        <button class="love-btn" onclick="giveCompliment()">Press for surprise 💌</button>
+        <div id="compliment" style="margin-top:10px; font-weight:bold; color:#e91e63;"></div>
+    </div>
 </div>
 
 <script>
 // No button runs away
 const noBtn = document.getElementById("noBtn");
-
 noBtn.addEventListener("mouseover", moveNo);
 noBtn.addEventListener("click", moveNo);
 
@@ -160,15 +162,74 @@ function moveNo() {
     noBtn.innerText = "Yes 😌";
 }
 
-// Show cricket mini game
+// Start cricket game
 function startGame() {
     document.getElementById("gameArea").style.display = "block";
 }
 
-// Bat hits six
+// Hit six
 function hitSix() {
     document.getElementById("ball").style.transform = "translateY(-120px)";
     document.getElementById("cheer").style.display = "block";
+    confettiBurst();
+    startHearts();
+}
+
+// Confetti
+function confettiBurst() {
+    for (let i = 0; i < 40; i++) {
+        const conf = document.createElement("div");
+        conf.innerHTML = "✨";
+        conf.style.position = "fixed";
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.top = "-10px";
+        conf.style.fontSize = "20px";
+        conf.style.animation = "fall 2s linear forwards";
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 2000);
+    }
+}
+
+// Heart catch game
+let score = 0;
+function startHearts() {
+    document.getElementById("heartGame").style.display = "block";
+    setInterval(createHeart, 800);
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 90 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = "28px";
+    heart.style.cursor = "pointer";
+    heart.style.transition = "top 3s linear";
+    document.body.appendChild(heart);
+
+    setTimeout(() => { heart.style.top = "-10vh"; }, 50);
+
+    heart.onclick = () => {
+        score++;
+        document.getElementById("score").innerText = "Score: " + score;
+        heart.remove();
+    };
+
+    setTimeout(() => heart.remove(), 3000);
+}
+
+// Compliments
+function giveCompliment() {
+    const lines = [
+        "You have the cutest smile in the universe 😌",
+        "You make my bad days disappear 💛",
+        "Certified Pretti = 100% adorable 🥹",
+        "My favorite notification is you 📱💖",
+        "You are literally my happy place ✨"
+    ];
+    const random = lines[Math.floor(Math.random() * lines.length)];
+    document.getElementById("compliment").innerText = random;
 }
 </script>
 
